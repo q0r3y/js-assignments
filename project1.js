@@ -2,7 +2,7 @@
 *   @author: q0r3y
 *   @version: 0.0.1
 *   @summary: Project 1: River Falls Homes Construction Company Project 1 :: created: 09.28.20
-*   @todo ADD REQUIRED FILES TO FOLDER
+*   @todo 
 */
 
 "use strict";
