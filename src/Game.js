@@ -2,7 +2,7 @@
  *   @author: q0r3y
  *   @version: 0.0.1
  *   @summary: Project 2: Pig Dice Game
- *   @todo add documentation
+ *   @todo
  */
 
 "use strict";

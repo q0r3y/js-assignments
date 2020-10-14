@@ -1,9 +1,8 @@
 /**
- * Assignment9 Player Class
- * Creates a Player object
- *
- * @ q0r3y
- * @ 05.08.20
+ *   @author: q0r3y
+ *   @version: 0.0.1
+ *   @summary: Player class
+ *   @todo
  */
 
 class Player {

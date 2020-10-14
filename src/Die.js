@@ -1,7 +1,11 @@
+/**
+ *   @author: q0r3y
+ *   @version: 0.0.1
+ *   @summary: Die class
+ *   @todo
+ */
+
 "use strict";
-
-
-
 class Die {
     #_dieType;
     #_dieValue;
