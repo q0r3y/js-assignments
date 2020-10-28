@@ -1,6 +1,6 @@
 /**
 *   @author: q0r3y
-*   @version: 0.0.1
+*   @version: 0.0.2
 *   @summary: SlotMachine Class
 *   @todo
 */

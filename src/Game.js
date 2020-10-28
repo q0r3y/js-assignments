@@ -1,6 +1,6 @@
 /**
 *   @author: q0r3y
-*   @version: 0.0.1
+*   @version: 0.0.2
 *   @summary: SlotMachine Game Class
 *   @todo
 */
@@ -34,7 +34,7 @@ class Game {
   }
 
   printGame() {
-    console.log("\n**Welcome to the simulated slot machine**\n");
+    console.log(`\n**Welcome to the simulated slot machine**\n`);
   }
 
   setDeposit() {
@@ -68,7 +68,7 @@ class Game {
   }
 
   processResults(spinResult) {
-    console.log("\n",spinResult,"\n");
+    console.log(`\n${spinResult}\n`);
     const countMap = spinResult.reduce((map, item) => map.set(item, (map.get(item) || 0) + 1), new Map());
     return [...countMap.values()].sort().pop();
   }
@@ -76,15 +76,15 @@ class Game {
   displayWinnings(matches) {
     switch (matches) {
       case 3:
-      console.log(" You had 3 matches! You win $",(this.getDeposit() * 3),"this round.\n");
+      console.log(` You had 3 matches! You win $${this.getDeposit() * 3} this round.\n`);
       this.setAmountWon(this.getDeposit() * 3);
       break;
       case 2:
-      console.log(" You had 2 matches! You win $",(this.getDeposit() * 2),"this round.\n");
+      console.log(` You had 2 matches! You win $${(this.getDeposit() * 2)} this round.\n`);
       this.setAmountWon(this.getDeposit() * 2);
       break;
       case 1:
-      console.log(" You had no matches! You win $0 this round.\n");
+      console.log(` You had no matches! You win $0 this round.\n`);
       this.#_amountWon = 0;
       break;
     }
@@ -101,8 +101,8 @@ class Game {
       } else if (choice.toLowerCase() === "n") {
         this.#_playing = false;
         chosen = true;
-        console.log("You deposited: ",this.getDeposit());
-        console.log("You won: ",this.getAmountWon());
+        console.log(`You deposited: ${this.getDeposit()}`);
+        console.log(`You won: ${this.getAmountWon()}`);
         this.setAmountWon(0);
       } else {
         choice = PROMPT.question(`Invalid choice. Would you like to play again?(y/n): `);
