@@ -8,7 +8,7 @@
 
 class Player {
 
-    #_totalPoints = 0;
+    #_cash = 0;
     #_name;
 
     constructor(name) {
@@ -23,12 +23,12 @@ class Player {
         this.#_name = value;
     }
 
-    getTotalPoints() {
-        return this.#_totalPoints;
+    get cash() {
+        return this.#_cash;
     }
 
-    setTotalPoints(value) {
-        this.#_totalPoints = value;
+    set cash(value) {
+        this.#_cash = value;
     }
 
 
