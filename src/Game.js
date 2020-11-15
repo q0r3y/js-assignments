@@ -30,7 +30,6 @@ const PLAYER = require('./Player.js');
 const DECK = require('./Deck.js');
 const PROMPT = require('readline-sync');
 
-// Need to verify that bets are not > the pot
 
 class Game {
 
