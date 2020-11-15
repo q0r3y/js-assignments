@@ -1,14 +1,19 @@
-/**
- * PLayer Class
- * Creates a Player object
- *
- * @ q0r3y
- * @ 11.06.20
- */
+/*******************************************************************************
+*
+*   Description:
+*    Player class used to create a player object for the in-between card game.
+*
+*   Author: q0r3y
+*
+*   Date: 11.15.20
+*
+*   Revised:
+*
+*******************************************************************************/
 
 class Player {
 
-    #_cash = 0;
+    #_winnings = 0;
     #_name;
 
     constructor(name) {
@@ -23,16 +28,12 @@ class Player {
         this.#_name = value;
     }
 
-    get cash() {
-        return this.#_cash;
+    get winnings() {
+        return this.#_winnings;
     }
 
-    set cash(value) {
-        this.#_cash = value;
+    set winnings(value) {
+        this.#_winnings = value;
     }
-
-
-
 }
-
 module.exports = Player;

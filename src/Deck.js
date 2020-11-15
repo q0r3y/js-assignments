@@ -1,3 +1,17 @@
+/*******************************************************************************
+*
+*   Description:
+*    This class creates a deck array of 52 cards and shuffles the deck using the
+*    Durstenfeld shuffle algorithm
+*
+*   Author: q0r3y
+*
+*   Date: 11.15.20
+*
+*   Revised:
+*
+*******************************************************************************/
+
 "use strict";
 
 class Deck {
@@ -9,7 +23,7 @@ class Deck {
         this.shuffleDeck();
     }
 
-    /* Builds the Deck array with 4 suits of every rank. The rank includes the card value. */
+    /* Builds the Deck array with 4 suits of every rank. The rank value is the card value. */
     buildDeck() {
 
         const SUITS = ['SPADES', 'DIAMONDS', 'CLUBS', 'HEARTS'];
@@ -36,12 +50,12 @@ class Deck {
     }
 
     /* Returns an array of specified number of cards off the deck */
-    getCards(numCards) {
+    drawCards(numCards) {
         let drawArray = [];
         for (let i = 1; i <= numCards; i++) {
             let drawnCard = this.#_cardArray.pop();
             if (typeof(drawnCard) === 'undefined') {
-                console.log(`Ran out of cards. Rebuilding and shuffling deck..`);
+                console.log(` [*] Ran out of cards. Rebuilding and shuffling deck..`);
                 this.buildDeck();
                 this.shuffleDeck();
                 drawnCard = this.#_cardArray.pop();
@@ -58,10 +72,5 @@ class Deck {
     set cardArray(value) {
         this.#_cardArray = value;
     }
-
-
 }
-// {
-//     const DECK = new Deck();
-// }
 module.exports = Deck;
