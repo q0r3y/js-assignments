@@ -50,7 +50,7 @@ class Game {
       }
       this.#_deck = new DECK();
       this.playGame();
-    } else {;
+    } else {
       console.log("This game has a limit of 8 players.");
     }
   }
