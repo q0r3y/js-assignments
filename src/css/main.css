@@ -1,0 +1,17 @@
+body {
+
+    width: 80%;
+    margin: auto;
+    align-content: center;
+}
+
+main {
+    height: 300px;
+    display: grid;
+    grid-template: auto / 1fr 1fr 1fr;
+    outline: 1px solid black;
+}
+
+figure {
+    outline: 1px solid black;
+}
