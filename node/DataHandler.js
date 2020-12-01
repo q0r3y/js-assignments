@@ -1,7 +1,6 @@
 'use strict';
 
 const FS = require('fs');
-const FORMIDABLE = require('formidable').IncomingForm;
 
 class DataHandler {
 
@@ -12,9 +11,15 @@ class DataHandler {
      }
 
      static async receiveData(request, response) {
-          console.log(response.body);
+          // https://nodejs.dev/learn/get-http-request-body-data-using-nodejs
+          let data = '';
+          request.on('data', chunk => {
+               data += chunk;
+          })
+          request.on('end', () => {
+               console.log(JSON.parse(data).test);
+          })
           try {
-               console.log(request.body);
           } catch (error) {
                return error;
           }

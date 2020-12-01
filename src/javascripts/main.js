@@ -34,25 +34,16 @@ export default class Main {
 
         //let textData = document.getElementById('fileUpload');
 
-        let data = {
-                "employee": {
-                    "name":       "sonoo",
-                    "salary":      56000,
-                    "married":    true
-                }
-            };
-
-        console.log(`Data: ${JSON.stringify(data)}`);
-        console.log(`${data}`);
-
         try {
+            const data = {"test":"test"};
             const response = await fetch(document.url, {
                 method: 'POST',
+                body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json',
                     'x-requested-with': 'fetch.0',
                 },
-                body: JSON.stringify(data)
+
             });
             return await response.text();
         } catch(error) {
