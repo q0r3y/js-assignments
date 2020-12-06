@@ -3,31 +3,62 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="In-between card game">
     <title>In-Between</title>
-    <meta name="In-Between Card Game" content="Card Game">
-    <meta name="q0r3y" content="SitePoint">
-
     <link rel="stylesheet" href="src/css/main.css">
+    <link rel="shortcut icon" href="/src/images/favicon.ico"/>
 
 </head>
 
 <body>
-    <main>
-        <figure id="card1">card1</figure>
-        <figure id="card2">card2</figure>
-        <figure id="card3">card3</figure>
+
+    <h1>In-Between Card Game</h1>
+
+    <main id="cards">
+        <p id="card1-label">Card 1</p>
+        <p id="card2-label">Card 2</p>
+        <p id="card3-label">Card 3</p>
+        <figure class="card" id="card1">
+            <div class="card-value"></div>
+        </figure>
+
+        <figure class="card" id="card2">
+            <div class="card-value"></div>
+        </figure>
+
+        <figure class="card" id="card3">
+            <div class="card-value"></div>
+        </figure>
     </main>
 
-    <section id="gameText">
 
+
+    <section id="stats">
+        <div id="player1-stats">
+            <p id="player1-name">
+            <p id="player1-cash"> </p>
+        </div>
+        <div id="player2-stats">
+            <p id="player2-name">
+            <p id="player2-cash"> </p>
+        </div>
+    </section>
+
+    <p id="pot-value"></p>
+
+    <section id="game-text">
+        <label for="input-box">Player1: Input your ante for the pot</label>
     </section>
 
 
-    <form id="input">
-        <input class="u-full-width" type="email" placeholder="username@mailserver.com" name="getEmail" id="getEmail">
-        <input class="button-primary" type="button" value="button" name="button" id="button">
+    <form id="game-input">
+        <input type="text" name="input" id="input-box">
+        <input class="button-primary" type="button" value="submit" name="button" id="button">
     </form>
+
+    <section id="error-text">Error</section>
+
 </body>
-<script src="/src/javascripts/main.js" type="module"></script>
+<script src="/src/javascripts/Game.js" type="module"></script>
 </html>

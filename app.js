@@ -56,6 +56,8 @@ class app {
                     } else {
                          console.log(`Yo, somethings super wrong BDH!`);
                     }
+               } else if (request.url.indexOf('.txt') >= 0) {
+                    DATA_HANDLER.renderDom(request.url.slice(1), 'text/plain', httpHandler, 'utf-8');
                } else if (request.url.indexOf('.css') >= 0) {
                     DATA_HANDLER.renderDom(request.url.slice(1), 'text/css', httpHandler, 'utf-8');
                } else if (request.url.indexOf('.js') >= 0) {

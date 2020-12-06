@@ -7,33 +7,32 @@
 *
 *   Date: 11.15.20
 *
-*   Revised:
+*   Revised: 12.04.20
 *
 *******************************************************************************/
 
-class Player {
+export default class Player {
 
-    #_winnings = 0;
-    #_name;
+    _cash = 0;
+    _name;
 
     constructor(name) {
-        this.#_name = name;
+        this._name = name;
     }
 
     get name() {
-        return this.#_name;
+        return this._name;
     }
 
     set name(value) {
-        this.#_name = value;
+        this._name = value;
     }
 
-    get winnings() {
-        return this.#_winnings;
+    get cash() {
+        return this._cash;
     }
 
-    set winnings(value) {
-        this.#_winnings = value;
+    set cash(value) {
+        this._cash = value;
     }
 }
-module.exports = Player;
