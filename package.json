@@ -1,15 +1,15 @@
 {
   "name": "in-between",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "In-between browser card game",
+  "main": "bin/server",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bin/server"
   },
   "keywords": [],
-  "author": "",
+  "author": "q0r3y",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "body-parser": "^1.19.0",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
@@ -20,8 +20,16 @@
     "nedb": "^1.8.0",
     "readline-sync": "^1.4.10"
   },
-  "devDependencies": {
+  "dependencies": {
     "ejs": "^3.1.5",
     "formidable": "^1.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/q0r3y/js-prj5.git"
+  },
+  "bugs": {
+    "url": "https://github.com/q0r3y/js-prj5/issues"
+  },
+  "homepage": "https://github.com/q0r3y/js-prj5#readme"
 }
