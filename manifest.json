@@ -1,0 +1,23 @@
+{
+  "name": "PWA ATM",
+  "short_name": "ATM",
+  "lang": "en-US",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "src/images/152-bitcoin.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "public/images/512-bitcoin.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1779ba",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait"
+}
