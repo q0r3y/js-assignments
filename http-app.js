@@ -84,5 +84,7 @@ class app {
           }).listen(HTTP_PORT);
      }
 }
-
+{
+     new app();
+}
 module.exports = app;

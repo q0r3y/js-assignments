@@ -24,6 +24,7 @@ class DataHandler {
           // } catch (error) {
           //      return error;
           // }
+          return true;
      }
 
      static getKey() {
