@@ -1,6 +1,6 @@
 'use strict';
 
-export default class User {
+class User {
 
     _email;
     _password;
@@ -56,3 +56,5 @@ export default class User {
     }
 
 }
+
+module.exports = User;

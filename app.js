@@ -16,7 +16,7 @@ class app {
      constructor() {
           this.#data_handler = new DATA_HANDLER();
           this.#ejsData = null;
-          this.#fileName = 'index.ejs';
+          this.#fileName = 'newuser.ejs';
           this.loadServer();
      }
 
@@ -90,7 +90,7 @@ class app {
                } else if (request.url.indexOf('.ico') >= 0) {
                     DATA_HANDLER.renderDom(request.url.slice(1), 'image/x-icon', httpHandler, 'binary');
                } else if (request.url.indexOf('/') >= 0) {
-                    DATA_HANDLER.renderDom('src/views/index.ejs', 'text/html', httpHandler, 'utf-8');
+                    DATA_HANDLER.renderDom('src/views/newuser.ejs', 'text/html', httpHandler, 'utf-8');
                } else {
                     DATA_HANDLER.renderDom(`HEY! What you're looking for: It's not here!`, 'text/html', httpHandler, 'utf-8');
                }

@@ -1,0 +1,13 @@
+<%- include ('src/views/header.ejs'); -%>
+
+
+<form id="new-user-form">
+    <input type="text" name="name" id="name-input">
+    <input type="text" name="email" id="email-input">
+    <input type="text" name="password" id="password-input">
+    <input class="button-primary" type="button" value="submit" name="button" id="new-user-submit">
+</form>
+
+<script src="src/javascript/NewUser.js" type="module"></script>
+
+<%- include ('src/views/footer.ejs'); -%>

@@ -1,27 +1,4 @@
-<!doctype html>
+<%- include ('src/views/header.ejs'); -%>
 
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-
-    <title>PWA ATM</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="PWA ATM App">
-    <link rel="stylesheet" href="src/css/styles.css">
-    <link rel="shortcut icon" href="/src/images/favicon.ico"/>
-
-</head>
-
-<body>
-
-<form id="new-user-form">
-    <input type="text" name="name" id="input-box">
-    <input type="text" name="email" id="input-box">
-    <input type="text" name="password" id="input-box">
-    <input class="button-primary" type="button" value="submit" name="button" id="new-user-submit">
-</form>
-
-
-<script src="src/javascript/frontend/Main.js" type="module"></script>
-</body>
-</html>
+<script src="src/javascript/Index.js" type="module"></script>
+<%- include ('src/views/footer.ejs'); -%>
