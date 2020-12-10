@@ -1,4 +1,22 @@
 <%- include ('src/views/header.ejs'); -%>
 
+    <section id="welcome-bar">Welcome name</section>
+
+    <section id="balance-bar">
+        <p class="account-name">Savings Account: 1-001</p>
+         <div class="balance-amount">$1,100</div>
+        <p class="account-name">Checkings Account: 1-002</p>
+         <div class="balance-amount">$1,200</div>
+        <p class="account-name">Credit Card: 1234</p>
+         <div class="balance-amount">$3,000</div>
+    </section>
+
+    <section id="menu-bar">
+        <button class="menu-button" id="deposit-button">Deposit</button>
+        <button class="menu-button" id="transfer-button">Transfer</button>
+        <button class="menu-button" id="logout-button">Logout</button>
+    </section>
+
+
 <script src="src/javascript/Index.js" type="module"></script>
 <%- include ('src/views/footer.ejs'); -%>

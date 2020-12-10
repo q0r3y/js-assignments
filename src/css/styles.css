@@ -1,0 +1,49 @@
+
+
+@media only screen and (max-width: 900px) {
+
+    body {
+        height: 98vh;
+        width: 95vw;
+        background-color: SteelBlue;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh auto 10vh;
+        grid-gap: 1vh;
+    }
+
+    section {
+        text-align: center;
+        background-color: lightgrey;
+    }
+
+    #balance-bar {
+        display:grid;
+        grid-template-rows: 3em 1fr 3em 1fr 3em 1fr;
+    }
+
+    .account-name {
+        text-align: left;
+    }
+
+    .balance-amount {
+
+        background: gray;
+    }
+
+    #menu-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .menu-button {
+        margin: auto;
+        height: 75%;
+        width: 75%;
+        outline: 1px solid black;
+    }
+
+}
+
+
+

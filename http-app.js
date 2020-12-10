@@ -60,9 +60,10 @@ class app {
                          return await DATA_HANDLER.handleNewUser(this.#bank, request, response);
                     } else if (request.headers['x-requested-with'] === 'fetch.login') {
                          return await DATA_HANDLER.handleLogin(this.#bank, request, response);
-                    } else if (request.headers['x-requested-with'] === 'fetch.index') {
-                         return await DATA_HANDLER.handleLogin(this.#bank, request, response);
+                    } else if (request.headers['x-requested-with'] === 'fetch.user') {
+                         return await DATA_HANDLER.handleUserRetrieval(this.#bank, request, response);
                     } else {
+                         console.log(`${request.headers}`);
                          console.log(`Yo, somethings super wrong BDH!`);
                     }
                /**

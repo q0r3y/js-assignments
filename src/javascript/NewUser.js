@@ -1,14 +1,42 @@
 'use strict';
 
-import EVENT_LISTEN from './EventListeners.js';
+import STATIC from './Static.js';
 
 export default class NewUser {
 
-
     constructor() {
-        EVENT_LISTEN.newUserEventListener();
+        this.newUserEventListener();
     }
 
+    /**
+     * Listens for new user event
+     * @returns {void}
+     */
+    newUserEventListener() {
+        console.log(`Listening on New User Event`);
+
+        document.getElementById('new-user-submit').addEventListener('click', async () => {
+            const newUserForm = new FormData(document.getElementById('new-user-form'));
+
+            const userData = {
+                "_name": newUserForm.get('name'),
+                "_email": newUserForm.get('email'),
+                "_password":newUserForm.get('password')
+            }
+
+            const stringJson = JSON.stringify(userData);
+
+            // Change screen text to: User has been created.
+            let userCreated = await STATIC.performFetch(stringJson, 'fetch.newuser');
+            console.log(userCreated);
+
+            // Need to add a message on success
+            document.location.href="/";
+
+            // if fail then post error message
+        })
+
+    }
 
 }
 {

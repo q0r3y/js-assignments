@@ -1,14 +1,14 @@
 'use strict';
 // Stuff that is on every page
 
-import EVENT_LISTEN from './EventListeners.js';
+import STATIC from './Static.js';
 
 export default class Main {
 
-
     constructor() {
-        EVENT_LISTEN.stopEnterKey();
+        STATIC.stopEnterKey();
     }
+
 }
 {
 new Main();

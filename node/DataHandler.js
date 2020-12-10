@@ -11,20 +11,6 @@ class DataHandler {
      }
 
      /**
-      * @desc Handles the creation of a new user
-      * @param bank
-      * @param request
-      * @param response
-      * @returns {Promise<void>}
-      */
-     static async handleNewUser(bank, request, response) {
-          await DataHandler.handleJsonData(request, response, async (parsedData) => {
-               await bank.createNewUser(parsedData);
-               response.end('User successfully created!');
-          })
-     }
-
-     /**
       * @desc Handles login operation
       * @param bank
       * @param request
@@ -45,15 +31,34 @@ class DataHandler {
      }
 
      /**
-      * @desc Handles user information for the index page
+      * @desc Handles the creation of a new user
       * @param bank
       * @param request
       * @param response
       * @returns {Promise<void>}
       */
-     static async handleUserInfo(bank, request, response) {
-          await DataHandler.handleJsonData(request, response, async () => {
+     static async handleNewUser(bank, request, response) {
+          await DataHandler.handleJsonData(request, response, async (parsedData) => {
+               await bank.createNewUser(parsedData);
+               response.end('User successfully created!');
+          })
+     }
 
+     /**
+      * @desc Retrieves the user object
+      * @param bank
+      * @param request
+      * @param response
+      * @returns {Promise<void>}
+      */
+     static async handleUserRetrieval(bank, request, response) {
+          await DataHandler.handleJsonData(request, response, async (parsedData) => {
+               const EMAIL = parsedData._email;
+               const USER_OBJECT = await bank.getUserObject(EMAIL);
+               if (USER_OBJECT) {
+                    console.log(`Retrieved user!`);
+                    response.end(JSON.stringify(USER_OBJECT));
+               }
           })
      }
 
