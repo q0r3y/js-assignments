@@ -14,8 +14,14 @@ class Bank {
         this.createTestUser();
     }
 
-    createNewUser(userData) {
-        const newUser = new USER(userData._name, userData._email, userData._password);
+    createNewUser(newUserData) {
+        for (let user of this.#userList) {
+            if (user.email === newUserData._email) {
+                console.log('User already exists');
+                return false;
+            }
+        }
+        const newUser = new USER(newUserData._name, newUserData._email, newUserData._password);
         newUser._USER_ID = ++USER._USER_ID;
         this.#userList.push(newUser)
         console.log(`UserHandler.addNewUser : New user added!`);
@@ -23,19 +29,21 @@ class Bank {
         console.log(`Email: ${newUser.email}`);
         console.log(`Password: ${newUser.password}`);
         console.log(`UserID:${newUser._USER_ID}`);
+        return true;
     }
 
     async userLogin(EMAIL, PASSWORD) {
-        let validLogin = false;
+        let isLoginValid = false;
+        console.log(`Checking logins...`);
         for (let user of this.#userList) {
             if (user.email === EMAIL && user.password === PASSWORD) {
-                validLogin = true;
+                isLoginValid = true;
                 console.log(`${EMAIL} logged in!`);
-                break;
+                return isLoginValid;
             }
-            console.log(`Checking logins...`);
         }
-        return validLogin;
+        console.log('Login not found.');
+        return isLoginValid;
     }
 
     async getUserObject(EMAIL) {
@@ -44,7 +52,9 @@ class Bank {
                 return {
                     '_name': user.name,
                     '_email': user.email,
-                    '_balance': user.balance
+                    '_savings_balance': user.savings_balance,
+                    '_checking_balance': user.checking_balance,
+                    '_credit_balance': user.credit_balance
                 };
             }
         }
@@ -53,7 +63,7 @@ class Bank {
 
     createTestUser() {
         // TEST ACCOUNT
-        const testUser = new USER('asdf', 'asdf@asdf.com', 'asdf');
+        const testUser = new USER('asdf', 'asdf', 'asdf');
         testUser._USER_ID = ++USER._USER_ID;
         this.#userList.push(testUser);
         console.log(`Created test user`);

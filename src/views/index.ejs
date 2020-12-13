@@ -1,14 +1,22 @@
 <%- include ('src/views/header.ejs'); -%>
 
-    <section id="welcome-bar">Welcome name</section>
+<link rel="stylesheet" href="src/css/index-styles.css">
+
+</head>
+<body>
+
+    <section id="welcome-bar">
+        <p>Mr.Big's Bank</p>
+        <p id="welcome-name"></p>
+    </section>
 
     <section id="balance-bar">
-        <p class="account-name">Savings Account: 1-001</p>
-         <div class="balance-amount">$1,100</div>
-        <p class="account-name">Checkings Account: 1-002</p>
-         <div class="balance-amount">$1,200</div>
+        <p class="account-name">Savings Account</p>
+        <div class="balance-amount"><p id="savings-balance">$1,100</p></div>
+        <p class="account-name">Checking Account</p>
+         <div class="balance-amount"><p id="checking-balance">$1,100</p></div>
         <p class="account-name">Credit Card: 1234</p>
-         <div class="balance-amount">$3,000</div>
+         <div class="balance-amount"><p id="credit-balance">$1,100</p></div>
     </section>
 
     <section id="menu-bar">

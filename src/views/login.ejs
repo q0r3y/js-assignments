@@ -1,11 +1,26 @@
 <%- include ('src/views/header.ejs'); -%>
 
-<form id="login-form">
-    <input type="text" name="email" id="email-input">
-    <input type="password" name="password" id="password-input">
-    <input type="button" value="login" name="button" id="login-button">
-    <input type="button" value="New User" name="button" id="newuser-button">
-</form>
+<link rel="stylesheet" href="src/css/login-styles.css">
+
+</head>
+<body>
+
+    <figure>
+        <img src="src/images/152-bitcoin.png">
+    </figure>
+
+
+    <form id="login-form">
+        <input type="text" name="email" id="email-input">
+        <input type="password" name="password" id="password-input">
+        <input type="button" value="Login" name="button" id="login-button">
+        <input type="button" value="New User" name="button" id="newuser-button">
+    </form>
+
+    <p id="error-text">
+    </p>
+
+
 
 <script src="src/javascript/Login.js" type="module"></script>
 <%- include ('src/views/footer.ejs'); -%>

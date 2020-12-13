@@ -1,6 +1,7 @@
 'use strict';
 
 const DATA_HANDLER = require('./node/DataHandler');
+const BANK = require('./node/Bank');
 
 /**
  * Web server utilizing HTTP/2
@@ -9,14 +10,16 @@ class app {
      #data_handler;
      #ejsData;
      #fileName;
+     #bank;
 
      /**
       * @desc instantiates DataHandler object
       */
      constructor() {
           this.#data_handler = new DATA_HANDLER();
+          this.#bank = new BANK();
           this.#ejsData = null;
-          this.#fileName = 'newuser.ejs';
+          this.#fileName = 'login.ejs';
           this.loadServer();
      }
 
@@ -64,13 +67,25 @@ class app {
                          response.end(string, 'binary');
                     }
                };
-
+               /**
+                * POSTS
+                **/
                if (request.method === 'POST') {
-                    if (request.headers['x-requested-with'] === 'fetch.0') {
-                         return await DATA_HANDLER.receiveFile(request, response);
+                    if (request.headers['x-requested-with'] === 'fetch.newuser') {
+                         return await DATA_HANDLER.handleNewUser(this.#bank, request, response);
+                    } else if (request.headers['x-requested-with'] === 'fetch.login') {
+                         return await DATA_HANDLER.handleLogin(this.#bank, request, response);
+                    } else if (request.headers['x-requested-with'] === 'fetch.user') {
+                         return await DATA_HANDLER.handleUserRetrieval(this.#bank, request, response);
                     } else {
+                         console.log(`${request.headers}`);
                          console.log(`Yo, somethings super wrong BDH!`);
                     }
+               /**
+               * END POSTS
+                **/
+               } else if (request.url.indexOf('.txt') >= 0) {
+                    DATA_HANDLER.renderDom(request.url.slice(1), 'text/plain', httpHandler, 'utf-8');
                } else if (request.url.indexOf('.css') >= 0) {
                     DATA_HANDLER.renderDom(request.url.slice(1), 'text/css', httpHandler, 'utf-8');
                } else if (request.url.indexOf('.js') >= 0) {
@@ -89,8 +104,18 @@ class app {
                     DATA_HANDLER.renderDom(request.url.slice(1), 'application/vnd.ms-fontobject', httpHandler, 'binary');
                } else if (request.url.indexOf('.ico') >= 0) {
                     DATA_HANDLER.renderDom(request.url.slice(1), 'image/x-icon', httpHandler, 'binary');
-               } else if (request.url.indexOf('/') >= 0) {
+               /**
+                * PATHS
+                **/
+               } else if (request.url.indexOf('/newuser') >= 0) {
                     DATA_HANDLER.renderDom('src/views/newuser.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/index') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/index.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/login.ejs', 'text/html', httpHandler, 'utf-8');
+               /**
+               * END PATHS
+               **/
                } else {
                     DATA_HANDLER.renderDom(`HEY! What you're looking for: It's not here!`, 'text/html', httpHandler, 'utf-8');
                }

@@ -11,7 +11,7 @@ class DataHandler {
      }
 
      /**
-      * @desc Handles login operation
+      * @desc Handles login operation (fetch.login)
       * @param bank
       * @param request
       * @param response
@@ -21,17 +21,13 @@ class DataHandler {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
                const EMAIL = parsedData._email;
                const PASSWORD = parsedData._password;
-               const validLogin = await bank.userLogin(EMAIL, PASSWORD);
-               if (validLogin) {
-                    response.end('true');
-               } else {
-                    response.end('');
-               }
+               const isValidLogin = await bank.userLogin(EMAIL, PASSWORD);
+               response.end(String(isValidLogin))
           })
      }
 
      /**
-      * @desc Handles the creation of a new user
+      * @desc Handles the creation of a new user (fetch.newuser)
       * @param bank
       * @param request
       * @param response
@@ -39,13 +35,13 @@ class DataHandler {
       */
      static async handleNewUser(bank, request, response) {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
-               await bank.createNewUser(parsedData);
-               response.end('User successfully created!');
+               const newUserCreated = await bank.createNewUser(parsedData);
+               response.end(String(newUserCreated));
           })
      }
 
      /**
-      * @desc Retrieves the user object
+      * @desc Retrieves the user object (fetch.user)
       * @param bank
       * @param request
       * @param response

@@ -27,11 +27,18 @@ export default class NewUser {
             const stringJson = JSON.stringify(userData);
 
             // Change screen text to: User has been created.
-            let userCreated = await STATIC.performFetch(stringJson, 'fetch.newuser');
-            console.log(userCreated);
+            const userCreated = await STATIC.performFetch(stringJson, 'fetch.newuser');
+            console.log(userCreated,userCreated, typeof(userCreated));
+
+            if (userCreated === 'true') {
+                console.log(`New user created!`);
+                document.location.href="/";
+            } else {
+                console.log('User was not created');
+            }
 
             // Need to add a message on success
-            document.location.href="/";
+
 
             // if fail then post error message
         })
