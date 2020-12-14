@@ -1,0 +1,32 @@
+<%- include ('src/views/partials/header.ejs'); -%>
+
+<link rel="stylesheet" href="src/css/home-page-styles.css">
+<link rel="stylesheet" href="src/css/transfer-page-styles.css">
+
+</head>
+<body>
+
+<%- include ('src/views/partials/top-welcome-bar.ejs'); -%>
+
+<section id="main-display-bar">
+    <h1>Transfer</h1>
+    <p class="account-name">From:</p>
+    <form id="transfer-form">
+        <select name="transfer-from-account" id="from-account">
+            <option id="savings-drop-down">Savings 1001 - 100.00</option>
+            <option id="checking-drop-down">Checking 1002 - 0.00</option>
+            <option id="credit-drop-down">Credit 1003 - 0.00</option>
+        </select>
+        <p class="account-name">To:</p>
+        <input type="text" name="transfer-to-account" id="transfer-to" placeholder="Ex: 1001">
+        <input class="button-primary" type="button" value="Transfer" name="button" id="transfer-submit">
+        </button>
+    </form>
+
+</section>
+
+<%- include ('src/views/partials/bottom-menu-bar.ejs'); -%>
+
+<script src="src/javascript/pages/Transfer.js" type="module"></script>
+
+<%- include ('src/views/partials/footer.ejs'); -%>

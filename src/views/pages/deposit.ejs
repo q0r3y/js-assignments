@@ -1,0 +1,25 @@
+<%- include ('src/views/partials/header.ejs'); -%>
+
+<link rel="stylesheet" href="src/css/home-page-styles.css">
+<link rel="stylesheet" href="src/css/deposit-page-styles.css">
+
+</head>
+<body>
+
+    <%- include ('src/views/partials/top-welcome-bar.ejs'); -%>
+
+    <section id="main-display-bar">
+        <p class="account-name" id="savings-name">Transfe:</p>
+        <div class="balance-amount"><p id="savings-balance">$</p></div>
+        <p class="account-name" id="checking-name">Checking Account:</p>
+        <div class="balance-amount"><p id="checking-balance">$</p></div>
+        <p class="account-name" id="credit-name">Credit Card:</p>
+        <div class="balance-amount"><p id="credit-balance">$</p></div>
+    </section>
+
+    <%- include ('src/views/partials/bottom-menu-bar.ejs'); -%>
+
+
+<script src="src/javascript/pages/Deposit.js" type="module"></script>
+
+<%- include ('src/views/partials/footer.ejs'); -%>

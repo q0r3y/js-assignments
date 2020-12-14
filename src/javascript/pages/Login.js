@@ -1,13 +1,13 @@
 'use strict';
 
-import STATIC from './Static.js';
+import STATIC from '../Static.js';
 
 export default class Login {
 
     constructor() {
         sessionStorage.setItem("user", '');
         Login.loginEventListener();
-        Login.newUserListener();
+        Login.newUserLinkListener();
     }
 
     /**
@@ -23,8 +23,8 @@ export default class Login {
             const PASSWORD = loginForm.get('password')
 
             const loginData = {
-                "_email": EMAIL,
-                "_password": PASSWORD
+                "email": EMAIL,
+                "password": PASSWORD
             }
 
             const stringJson = JSON.stringify(loginData);
@@ -33,7 +33,7 @@ export default class Login {
             if (isValidLogin === 'true') {
                 console.log('Login successful!');
                 sessionStorage.setItem("user", String(EMAIL));
-                document.location.href="/index";
+                document.location.href="/home";
             } else {
                 document.getElementById('error-text').innerText = "Error invalid password or user not found";
             }
@@ -44,7 +44,7 @@ export default class Login {
      * Listens for new user button click
      * @returns {void}
      */
-    static newUserListener() {
+    static newUserLinkListener() {
         document.getElementById('newuser-button').addEventListener('click', () => {
             document.location.href="/newuser";
         })

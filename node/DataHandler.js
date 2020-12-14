@@ -19,8 +19,8 @@ class DataHandler {
       */
      static async handleLogin(bank, request, response) {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
-               const EMAIL = parsedData._email;
-               const PASSWORD = parsedData._password;
+               const EMAIL = parsedData.email;
+               const PASSWORD = parsedData.password;
                const isValidLogin = await bank.userLogin(EMAIL, PASSWORD);
                response.end(String(isValidLogin))
           })
@@ -49,11 +49,25 @@ class DataHandler {
       */
      static async handleUserRetrieval(bank, request, response) {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
-               const EMAIL = parsedData._email;
+               const EMAIL = parsedData.email;
                const USER_OBJECT = await bank.getUserObject(EMAIL);
                if (USER_OBJECT) {
                     console.log(`Retrieved user!`);
                     response.end(JSON.stringify(USER_OBJECT));
+               }
+          })
+     }
+
+     static async handleFundTransfer(bank, request, response) {
+          await DataHandler.handleJsonData(request, response, async (parsedData) => {
+               const TRANSFER_FROM = parsedData.transfer_from;
+               const TRANSFER_TO = parsedData.transfer_to;
+               const AMOUNT = parsedData.amount;
+
+               const SUCCESSFUL_TRANSFER = await bank.transferFunds(TRANSFER_FROM, TRANSFER_TO, AMOUNT);
+
+               if (SUCCESSFUL_TRANSFER) {
+
                }
           })
      }

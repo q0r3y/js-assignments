@@ -16,19 +16,18 @@ class Bank {
 
     createNewUser(newUserData) {
         for (let user of this.#userList) {
-            if (user.email === newUserData._email) {
+            if (user.email === newUserData.email) {
                 console.log('User already exists');
                 return false;
             }
         }
-        const newUser = new USER(newUserData._name, newUserData._email, newUserData._password);
-        newUser._USER_ID = ++USER._USER_ID;
+        const newUser = new USER(newUserData.name, newUserData.email, newUserData.password);
         this.#userList.push(newUser)
         console.log(`UserHandler.addNewUser : New user added!`);
         console.log(`Name: ${newUser.name}`);
         console.log(`Email: ${newUser.email}`);
         console.log(`Password: ${newUser.password}`);
-        console.log(`UserID:${newUser._USER_ID}`);
+        console.log(`UserID:${newUser.userID}`);
         return true;
     }
 
@@ -50,14 +49,75 @@ class Bank {
         for (let user of this.#userList) {
             if (user.email === EMAIL) {
                 return {
-                    '_name': user.name,
-                    '_email': user.email,
-                    '_savings_balance': user.savings_balance,
-                    '_checking_balance': user.checking_balance,
-                    '_credit_balance': user.credit_balance
+                    'account_id':user.userID,
+                    'name': user.name,
+                    'email': user.email,
+                    'savings_balance': user.accounts.SAVINGS.getBalanceFixed(),
+                    'checking_balance': user.accounts.CHECKING.getBalanceFixed(),
+                    'credit_balance': user.accounts.CREDIT.getBalanceFixed(),
+                    'savings_account': user.accounts.SAVINGS.accountNumber,
+                    'checking_account': user.accounts.CHECKING.accountNumber,
+                    'credit_account' : user.accounts.CREDIT.accountNumber
                 };
             }
         }
+    }
+
+    transferFunds(fromAccount, toAccount, transferAmount) {
+        console.log('Transferring funds');
+        console.log(fromAccount, toAccount);
+
+        const fromUser = {
+            'accountValid' : false,
+            'account' : ''
+        }
+
+        const toUser = {
+            'accountValid' : false,
+            'account' : ''
+        }
+
+        for (let user of this.#userList) {
+            console.log(`Checking user list..`);
+            for (let account in user.accounts) {
+                const USERS_ACCOUNT_NUMBER = String(user.accounts[account].accountNumber);
+                console.log(USERS_ACCOUNT_NUMBER);
+                if (fromAccount === USERS_ACCOUNT_NUMBER) {
+                    fromUser.accountValid = true;
+                    fromUser.account = user.accounts[account];
+                    console.log('Found valid From Account');
+                }
+                if (toAccount === USERS_ACCOUNT_NUMBER) {
+                    toUser.accountValid = true;
+                    toUser.account = user.accounts[account];
+                    console.log('Found valid To Account');
+                }
+
+                if (fromUser.accountValid && toUser.accountValid) {
+                    if (fromUser.account.balance - transferAmount >= 0) {
+                        fromUser.account.balance -= transferAmount;
+                        toUser.account.balance += transferAmount;
+                        console.log(fromUser.account.balance);
+                        console.log(`Funds transferred successfully.`);
+                        return true;
+                    } else {
+                        console.log(`The transfer would make the fromAccount balance negative. Returning false`);
+                        return false;
+                    }
+                }
+
+            }
+
+        }
+        return false;
+    }
+
+    depositFunds(account) {
+
+    }
+
+    withdrawFunds(account) {
+
     }
 
 

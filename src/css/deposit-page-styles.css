@@ -1,0 +1,5 @@
+#main-display-bar {
+    display:grid;
+    grid-template-rows: 3em 1fr 3em 1fr 3em 1fr;
+    padding: 10px;
+}

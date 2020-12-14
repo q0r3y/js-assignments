@@ -62,6 +62,8 @@ class app {
                          return await DATA_HANDLER.handleLogin(this.#bank, request, response);
                     } else if (request.headers['x-requested-with'] === 'fetch.user') {
                          return await DATA_HANDLER.handleUserRetrieval(this.#bank, request, response);
+                    } else if (request.headers['x-requested-with'] === 'fetch.transfer') {
+                         return await DATA_HANDLER.handleFundTransfer(this.#bank, request, response);
                     } else {
                          console.log(`${request.headers}`);
                          console.log(`Yo, somethings super wrong BDH!`);
@@ -93,11 +95,17 @@ class app {
                 * PATHS
                 **/
                } else if (request.url.indexOf('/newuser') >= 0) {
-                    DATA_HANDLER.renderDom('src/views/newuser.ejs', 'text/html', httpHandler, 'utf-8');
-               } else if (request.url.indexOf('/index') >= 0) {
-                    DATA_HANDLER.renderDom('src/views/index.ejs', 'text/html', httpHandler, 'utf-8');
+                    DATA_HANDLER.renderDom('src/views/pages/newuser.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/home') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/pages/home.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/deposit') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/pages/deposit.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/withdraw') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/pages/withdraw.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/transfer') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/pages/transfer.ejs', 'text/html', httpHandler, 'utf-8');
                } else if (request.url.indexOf('/') >= 0) {
-                    DATA_HANDLER.renderDom('src/views/login.ejs', 'text/html', httpHandler, 'utf-8');
+                    DATA_HANDLER.renderDom('src/views/pages/login.ejs', 'text/html', httpHandler, 'utf-8');
                /**
                 * END PATHS
                 **/

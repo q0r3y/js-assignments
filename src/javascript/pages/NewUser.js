@@ -1,6 +1,6 @@
 'use strict';
 
-import STATIC from './Static.js';
+import STATIC from '../Static.js';
 
 export default class NewUser {
 
@@ -19,9 +19,9 @@ export default class NewUser {
             const newUserForm = new FormData(document.getElementById('new-user-form'));
 
             const userData = {
-                "_name": newUserForm.get('name'),
-                "_email": newUserForm.get('email'),
-                "_password":newUserForm.get('password')
+                "name": newUserForm.get('name'),
+                "email": newUserForm.get('email'),
+                "password":newUserForm.get('password')
             }
 
             const stringJson = JSON.stringify(userData);
@@ -34,6 +34,7 @@ export default class NewUser {
                 console.log(`New user created!`);
                 document.location.href="/";
             } else {
+                document.getElementById('error-text').innerText = "User already exists";
                 console.log('User was not created');
             }
 

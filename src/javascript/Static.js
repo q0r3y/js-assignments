@@ -1,10 +1,10 @@
 'use strict';
 
-export default class Static {
+/**
+ * Contains Static methods that are used on multiple pages
+ */
 
-    constructor() {
-        console.log('New Static Constructed.');
-    }
+export default class Static {
 
     /**
      * @async
@@ -41,6 +41,14 @@ export default class Static {
                 }
             }
         });
+    }
+
+    static async getUserData() {
+        let current_user = JSON.stringify({ 'email' : sessionStorage.getItem("user") } );
+        current_user = JSON.parse(await Static.performFetch(current_user, 'fetch.user'));
+        console.log(`Got user object`);
+        console.log(`${current_user.name}`);
+        return current_user;
     }
 
 }
