@@ -62,13 +62,11 @@ class DataHandler {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
                const TRANSFER_FROM = parsedData.transfer_from;
                const TRANSFER_TO = parsedData.transfer_to;
-               const AMOUNT = parsedData.amount;
+               const TRANSFER_AMOUNT = Number(parsedData.transferAmount);
 
-               const SUCCESSFUL_TRANSFER = await bank.transferFunds(TRANSFER_FROM, TRANSFER_TO, AMOUNT);
+               let transferStatus = await bank.transferFunds(TRANSFER_FROM, TRANSFER_TO, TRANSFER_AMOUNT);
 
-               if (SUCCESSFUL_TRANSFER) {
-
-               }
+               response.end(String(transferStatus));
           })
      }
 

@@ -21,10 +21,6 @@ class Account {
         this.#_accountType = value;
     }
 
-    getBalanceFixed() {
-        return this.#_balance.toFixed(2);
-    }
-
     get balance() {
         return this.#_balance;
     }

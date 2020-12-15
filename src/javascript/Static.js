@@ -46,8 +46,7 @@ export default class Static {
     static async getUserData() {
         let current_user = JSON.stringify({ 'email' : sessionStorage.getItem("user") } );
         current_user = JSON.parse(await Static.performFetch(current_user, 'fetch.user'));
-        console.log(`Got user object`);
-        console.log(`${current_user.name}`);
+        console.log(`Static.js: Got user object`);
         return current_user;
     }
 

@@ -10,17 +10,20 @@
 
 <section id="main-display-bar">
     <h1>Transfer</h1>
-    <p class="account-name">From:</p>
+
     <form id="transfer-form">
+        <p class="account-name">From Account:</p>
         <select name="transfer-from-account" id="from-account">
             <option id="savings-drop-down">Savings 1001 - 100.00</option>
             <option id="checking-drop-down">Checking 1002 - 0.00</option>
             <option id="credit-drop-down">Credit 1003 - 0.00</option>
         </select>
-        <p class="account-name">To:</p>
+        <p class="account-name">To Account:</p>
         <input type="text" name="transfer-to-account" id="transfer-to" placeholder="Ex: 1001">
+        <p class="amount-text">Transfer Amount:</p>
+        <input type="text" name="transfer-amount" id="transfer-amount">
         <input class="button-primary" type="button" value="Transfer" name="button" id="transfer-submit">
-        </button>
+        <p id="message-text"></p>
     </form>
 
 </section>

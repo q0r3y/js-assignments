@@ -8,17 +8,19 @@
 
     <%- include ('src/views/partials/top-welcome-bar.ejs'); -%>
 
+
     <section id="main-display-bar">
-        <p class="account-name" id="savings-name">Transfe:</p>
-        <div class="balance-amount"><p id="savings-balance">$</p></div>
-        <p class="account-name" id="checking-name">Checking Account:</p>
-        <div class="balance-amount"><p id="checking-balance">$</p></div>
-        <p class="account-name" id="credit-name">Credit Card:</p>
-        <div class="balance-amount"><p id="credit-balance">$</p></div>
+
+        <video autoplay id="video"></video>
+        <canvas id="video-canvas"></canvas>
+        <input type="button" class="image-button" value="Start Camera" name="start-capture-button" id="start-capture-button">
+        <input type="button" class="image-button" value="Capture Image" name="take-capture-button" id="take-capture-button">
+        <input type="button" class="image-button" value="Send Image" name="send-capture-button" id="send-capture-button">
     </section>
 
-    <%- include ('src/views/partials/bottom-menu-bar.ejs'); -%>
 
+
+    <%- include ('src/views/partials/bottom-menu-bar.ejs'); -%>
 
 <script src="src/javascript/pages/Deposit.js" type="module"></script>
 

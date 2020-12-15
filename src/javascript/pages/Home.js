@@ -20,15 +20,16 @@ export default class Home {
 
     async getCurrentUser() {
         this._user = await STATIC.getUserData();
+        console.log(this._user);
     }
 
     async displayBalance() {
         document.getElementById('savings-name').innerText = `Savings Account: ${this._user.savings_account}`;
         document.getElementById('checking-name').innerText = `Checking Account: ${this._user.checking_account}`;
         document.getElementById('credit-name').innerText = `Credit Card: ${this._user.credit_account}`;
-        document.getElementById('savings-balance').innerText = `$${this._user.savings_balance}`;
-        document.getElementById('checking-balance').innerText = `$${this._user.checking_balance}`;
-        document.getElementById('credit-balance').innerText = `$${this._user.credit_balance}`;
+        document.getElementById('savings-balance').innerText = `$${this._user.savings_balance.toFixed(2)}`;
+        document.getElementById('checking-balance').innerText = `$${this._user.checking_balance.toFixed(2)}`;
+        document.getElementById('credit-balance').innerText = `$${this._user.credit_balance.toFixed(2)}`;
     }
 
     async displayName() {

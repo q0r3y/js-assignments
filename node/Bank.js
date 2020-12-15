@@ -45,16 +45,16 @@ class Bank {
         return isLoginValid;
     }
 
-    async getUserObject(EMAIL) {
+    getUserObject(EMAIL) {
         for (let user of this.#userList) {
             if (user.email === EMAIL) {
                 return {
                     'account_id':user.userID,
                     'name': user.name,
                     'email': user.email,
-                    'savings_balance': user.accounts.SAVINGS.getBalanceFixed(),
-                    'checking_balance': user.accounts.CHECKING.getBalanceFixed(),
-                    'credit_balance': user.accounts.CREDIT.getBalanceFixed(),
+                    'savings_balance': user.accounts.SAVINGS.balance,
+                    'checking_balance': user.accounts.CHECKING.balance,
+                    'credit_balance': user.accounts.CREDIT.balance,
                     'savings_account': user.accounts.SAVINGS.accountNumber,
                     'checking_account': user.accounts.CHECKING.accountNumber,
                     'credit_account' : user.accounts.CREDIT.accountNumber
@@ -66,6 +66,7 @@ class Bank {
     transferFunds(fromAccount, toAccount, transferAmount) {
         console.log('Transferring funds');
         console.log(fromAccount, toAccount);
+
 
         const fromUser = {
             'accountValid' : false,
@@ -105,9 +106,7 @@ class Bank {
                         return false;
                     }
                 }
-
             }
-
         }
         return false;
     }

@@ -1,5 +1,26 @@
 #main-display-bar {
     display:grid;
-    grid-template-rows: 3em 1fr 3em 1fr 3em 1fr;
+    grid-template-rows: 3em 1fr;
     padding: 10px;
 }
+
+#transfer-form {
+    margin: 4vh 2vw auto 2vw;
+    text-align: left;
+    display: grid;
+    grid-template-rows: repeat(8, 6vh);
+}
+
+#transfer-form * {
+    border-radius: 10px;
+}
+
+#transfer-submit {
+    margin-top: 1vh;
+}
+
+#message-text {
+    text-align: center;
+}
+
+
