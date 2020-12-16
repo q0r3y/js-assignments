@@ -3,7 +3,6 @@
 export default class ImageCapture {
 
     constructor() {
-
         this.startVideoButtonListener();
         this.captureButtonListener();
         this.saveButtonListener();

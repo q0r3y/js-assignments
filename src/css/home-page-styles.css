@@ -62,7 +62,7 @@ div p {
     width: 50vw;
     margin: 0 auto 8px auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .menu-button {

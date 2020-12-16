@@ -100,8 +100,6 @@ class app {
                     DATA_HANDLER.renderDom('src/views/pages/home.ejs', 'text/html', httpHandler, 'utf-8');
                } else if (request.url.indexOf('/deposit') >= 0) {
                     DATA_HANDLER.renderDom('src/views/pages/deposit.ejs', 'text/html', httpHandler, 'utf-8');
-               } else if (request.url.indexOf('/withdraw') >= 0) {
-                    DATA_HANDLER.renderDom('src/views/pages/withdraw.ejs', 'text/html', httpHandler, 'utf-8');
                } else if (request.url.indexOf('/transfer') >= 0) {
                     DATA_HANDLER.renderDom('src/views/pages/transfer.ejs', 'text/html', httpHandler, 'utf-8');
                } else if (request.url.indexOf('/') >= 0) {

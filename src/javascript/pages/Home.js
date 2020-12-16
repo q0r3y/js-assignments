@@ -1,26 +1,20 @@
+/**
+ *
+ */
+
 'use strict';
 
 import STATIC from '../Static.js';
-import MENU_BAR from '../components/MenuBar.js'
 
 export default class Home {
 
-    _name;
     _user;
 
     constructor() {
-        console.log('New Home constructed.');
-        new MENU_BAR();
-        this.getCurrentUser().then(() => {
-            this.displayName().then(() => {
-                this.displayBalance();
-            })
-        });
-    }
-
-    async getCurrentUser() {
-        this._user = await STATIC.getUserData();
-        console.log(this._user);
+        this._user = JSON.parse(sessionStorage.getItem("user"));
+        this.displayName().then(() => {
+            this.displayBalance();
+        })
     }
 
     async displayBalance() {
@@ -34,14 +28,6 @@ export default class Home {
 
     async displayName() {
         document.getElementById('welcome-name').innerText = `Welcome ${this._user.name}!`;
-    }
-
-    get name() {
-        return this._name;
-    }
-
-    set name(value) {
-        this._name = value;
     }
 
 }

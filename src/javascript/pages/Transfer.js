@@ -1,23 +1,19 @@
+/**
+ *
+ */
+
 'use strict';
 
 import STATIC from '../Static.js';
-import MENU_BAR from '../components/MenuBar.js'
 
 export default class Transfer {
 
     _user;
 
     constructor() {
-        console.log('New Transfer constructed.');
-        new MENU_BAR();
-        this.getCurrentUser().then( () => {
-            this.setDropDownMenu();
-        })
+        this._user = JSON.parse(sessionStorage.getItem("user"));
+        this.setDropDownMenu();
         this.transferListener();
-    }
-
-    async getCurrentUser() {
-        this._user = await STATIC.getUserData();
     }
 
     setDropDownMenu() {

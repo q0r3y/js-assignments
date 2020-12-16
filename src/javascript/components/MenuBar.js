@@ -10,7 +10,6 @@ export default class MenuBar {
         console.log(`New MenuBar constructed.`);
         MenuBar.homeLinkListener();
         MenuBar.depositLinkListener();
-        MenuBar.withdrawLinkListener();
         MenuBar.transferLinkListener();
         MenuBar.logoutLinkListener();
     }
@@ -24,12 +23,6 @@ export default class MenuBar {
     static depositLinkListener() {
         document.getElementById('deposit-button').addEventListener('click', () => {
             document.location.href="/deposit";
-        })
-    }
-
-    static withdrawLinkListener() {
-        document.getElementById('withdraw-button').addEventListener('click', () => {
-            document.location.href="/withdraw";
         })
     }
 

@@ -5,6 +5,7 @@ import STATIC from '../Static.js';
 export default class NewUser {
 
     constructor() {
+        STATIC.stopEnterKey();
         this.newUserEventListener();
     }
 

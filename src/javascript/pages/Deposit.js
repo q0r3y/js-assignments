@@ -1,7 +1,12 @@
+/**
+ *
+ */
+
 'use strict';
 
+//todo send data, store in users account
+
 import STATIC from '../Static.js';
-import MENU_BAR from '../components/MenuBar.js'
 import IMAGE_CAPTURE from '../components/ImageCapture.js';
 
 export default class Deposit {
@@ -9,13 +14,8 @@ export default class Deposit {
     _user;
 
     constructor() {
-        console.log('New Deposit constructed.');
-        new MENU_BAR();
+        this._user = JSON.parse(sessionStorage.getItem("user"));
         new IMAGE_CAPTURE();
-    }
-
-    async setCurrentUser() {
-        this._user = await STATIC.getUserData();
     }
 
 }

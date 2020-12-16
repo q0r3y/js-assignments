@@ -1,8 +1,8 @@
-'use strict';
-
 /**
  * Contains Static methods that are used on multiple pages
  */
+
+'use strict';
 
 export default class Static {
 
@@ -43,11 +43,17 @@ export default class Static {
         });
     }
 
-    static async getUserData() {
-        let current_user = JSON.stringify({ 'email' : sessionStorage.getItem("user") } );
-        current_user = JSON.parse(await Static.performFetch(current_user, 'fetch.user'));
-        console.log(`Static.js: Got user object`);
-        return current_user;
+    /**
+     *
+     * @param EMAIL
+     * @returns {Promise<void>}
+     */
+    static async setUserSessionData(EMAIL) {
+        const emailJson = JSON.stringify({"email" : EMAIL})
+        console.log(`Setting user session data`);
+        const currentUser = await Static.performFetch(emailJson, 'fetch.user');
+        console.log(currentUser);
+        sessionStorage.setItem("user", currentUser);
     }
 
 }

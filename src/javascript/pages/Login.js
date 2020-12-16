@@ -6,15 +6,16 @@ export default class Login {
 
     constructor() {
         sessionStorage.setItem("user", '');
-        Login.loginEventListener();
-        Login.newUserLinkListener();
+        STATIC.stopEnterKey();
+        this.loginEventListener();
+        this.newUserLinkListener();
     }
 
     /**
      * Listens for new login
      * @returns {void}
      */
-    static loginEventListener() {
+    loginEventListener() {
         console.log(`Listening for login`);
 
         document.getElementById(`login-button`).addEventListener('click', async () => {
@@ -30,9 +31,10 @@ export default class Login {
             const stringJson = JSON.stringify(loginData);
 
             const isValidLogin = await STATIC.performFetch(stringJson, 'fetch.login');
+
             if (isValidLogin === 'true') {
-                console.log('Login successful!');
-                sessionStorage.setItem("user", String(EMAIL));
+                console.log('Valid login found!')
+                await STATIC.setUserSessionData(EMAIL);
                 document.location.href="/home";
             } else {
                 document.getElementById('error-text').innerText = "Error invalid password or user not found";
@@ -44,11 +46,13 @@ export default class Login {
      * Listens for new user button click
      * @returns {void}
      */
-    static newUserLinkListener() {
+    newUserLinkListener() {
         document.getElementById('newuser-button').addEventListener('click', () => {
             document.location.href="/newuser";
         })
     }
+
+
 
 }
 {
