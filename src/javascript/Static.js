@@ -11,7 +11,6 @@ export default class Static {
      * @returns {Promise<string>}
      */
     static async performFetch(data, fetchHeader) {
-        console.log(`Performing fetch with parameters: ${data}, ${fetchHeader}`);
         try {
             const response = await fetch(document.url, {
                 method: 'POST',
@@ -30,8 +29,7 @@ export default class Static {
      * For disabling enter key
      * @returns {void}
      */
-    static stopEnterKey() {
-        console.log(`Enter key disabled.`);
+    static disableEnterKey() {
         document.addEventListener('keypress', function(event) {
             const theKey = event.key;
             if (theKey.length > 1) {
@@ -45,14 +43,12 @@ export default class Static {
 
     /**
      *
-     * @param EMAIL
+     * @param email
      * @returns {Promise<void>}
      */
-    static async setUserSessionData(EMAIL) {
-        const emailJson = JSON.stringify({"email" : EMAIL})
-        console.log(`Setting user session data`);
+    static async setUserSessionData(email) {
+        const emailJson = JSON.stringify({"email" : email})
         const currentUser = await Static.performFetch(emailJson, 'fetch.user');
-        console.log(currentUser);
         sessionStorage.setItem("user", currentUser);
     }
 

@@ -16,6 +16,12 @@ class User {
     #_credit_balance;
 
 
+    /**
+     *
+     * @param name
+     * @param email
+     * @param password
+     */
     constructor(name, email, password) {
         this.#_name = name;
         this.#_email = email;
@@ -24,6 +30,9 @@ class User {
         this.createAccounts();
     }
 
+    /**
+     *
+     */
     createAccounts() {
         this.#_accounts = {
             'SAVINGS' : new Account('SAVINGS', 100),

@@ -7,6 +7,11 @@ class Account {
     #_balance;
     #_accountNumber;
 
+    /**
+     *
+     * @param accountType
+     * @param balance
+     */
     constructor(accountType, balance=0) {
         this.#_accountType = accountType;
         this.#_balance = balance;

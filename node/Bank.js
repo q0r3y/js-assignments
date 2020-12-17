@@ -7,22 +7,30 @@ const USER = require('./User');
 
 class Bank {
 
-    #userList = [];
+    #userDatabase = [];
 
+    /**
+     *
+     */
     constructor() {
         console.log('New Bank Created');
         this.createTestUser();
     }
 
+    /**
+     *
+     * @param newUserData
+     * @returns {boolean}
+     */
     createNewUser(newUserData) {
-        for (let user of this.#userList) {
+        for (let user of this.#userDatabase) {
             if (user.email === newUserData.email) {
                 console.log('User already exists');
                 return false;
             }
         }
         const newUser = new USER(newUserData.name, newUserData.email, newUserData.password);
-        this.#userList.push(newUser)
+        this.#userDatabase.push(newUser)
         console.log(`UserHandler.addNewUser : New user added!`);
         console.log(`Name: ${newUser.name}`);
         console.log(`Email: ${newUser.email}`);
@@ -31,10 +39,16 @@ class Bank {
         return true;
     }
 
+    /**
+     *
+     * @param EMAIL
+     * @param PASSWORD
+     * @returns {Promise<boolean>}
+     */
     async userLogin(EMAIL, PASSWORD) {
         let isLoginValid = false;
         console.log(`Checking logins...`);
-        for (let user of this.#userList) {
+        for (let user of this.#userDatabase) {
             if (user.email === EMAIL && user.password === PASSWORD) {
                 isLoginValid = true;
                 console.log(`${EMAIL} logged in!`);
@@ -45,8 +59,13 @@ class Bank {
         return isLoginValid;
     }
 
+    /**
+     *
+     * @param EMAIL
+     * @returns {{account_id: *, checking_balance: *, savings_balance: *, credit_balance: *, checking_account: *, name: *, savings_account: *, credit_account: *, email: *}}
+     */
     getUserObject(EMAIL) {
-        for (let user of this.#userList) {
+        for (let user of this.#userDatabase) {
             if (user.email === EMAIL) {
                 return {
                     'account_id':user.userID,
@@ -63,6 +82,13 @@ class Bank {
         }
     }
 
+    /**
+     *
+     * @param fromAccount
+     * @param toAccount
+     * @param transferAmount
+     * @returns {boolean}
+     */
     transferFunds(fromAccount, toAccount, transferAmount) {
         console.log('Transferring funds');
         console.log(fromAccount, toAccount);
@@ -78,7 +104,7 @@ class Bank {
             'account' : ''
         }
 
-        for (let user of this.#userList) {
+        for (let user of this.#userDatabase) {
             console.log(`Checking user list..`);
             for (let account in user.accounts) {
                 const USERS_ACCOUNT_NUMBER = String(user.accounts[account].accountNumber);
@@ -111,20 +137,22 @@ class Bank {
         return false;
     }
 
+    /**
+     *
+     * @param account
+     */
     depositFunds(account) {
 
     }
 
-    withdrawFunds(account) {
-
-    }
-
-
+    /**
+     *
+     */
     createTestUser() {
         // TEST ACCOUNT
         const testUser = new USER('asdf', 'asdf', 'asdf');
         testUser._USER_ID = ++USER._USER_ID;
-        this.#userList.push(testUser);
+        this.#userDatabase.push(testUser);
         console.log(`Created test user`);
     }
 }

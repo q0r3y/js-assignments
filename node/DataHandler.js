@@ -1,5 +1,7 @@
 'use strict';
 
+// Todo: Finish deposit method
+
 const FS = require('fs');
 
 class DataHandler {
@@ -58,6 +60,13 @@ class DataHandler {
           })
      }
 
+     /**
+      *
+      * @param bank
+      * @param request
+      * @param response
+      * @returns {Promise<void>}
+      */
      static async handleFundTransfer(bank, request, response) {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
                const TRANSFER_FROM = parsedData.transfer_from;
@@ -67,6 +76,19 @@ class DataHandler {
                let transferStatus = await bank.transferFunds(TRANSFER_FROM, TRANSFER_TO, TRANSFER_AMOUNT);
 
                response.end(String(transferStatus));
+          })
+     }
+
+     /**
+      *
+      * @param bank
+      * @param request
+      * @param response
+      * @returns {Promise<void>}
+      */
+     static async handleDeposit(bank, request, response) {
+          await DataHandler.handleJsonData(request, response, async (parsedData) => {
+               console.log('Got deposit');
           })
      }
 
@@ -88,10 +110,18 @@ class DataHandler {
           })
      }
 
+     /**
+      *
+      * @returns {Buffer}
+      */
      static getKey() {
           return FS.readFileSync(`data/certificates/localhost.key`);
      }
 
+     /**
+      *
+      * @returns {Buffer}
+      */
      static getCert() {
           return FS.readFileSync(`data/certificates/localhost.crt`);
      }

@@ -1,52 +1,51 @@
+/**
+ * Contains the methods necessary for the NewUser page
+ */
+
 'use strict';
 
 import STATIC from '../Static.js';
 
-export default class NewUser {
+class NewUser {
 
+    /**
+     *
+     */
     constructor() {
-        STATIC.stopEnterKey();
+        STATIC.disableEnterKey();
         this.newUserEventListener();
     }
 
     /**
-     * Listens for new user event
+     * Listens for submit button click on the new user page
      * @returns {void}
      */
     newUserEventListener() {
-        console.log(`Listening on New User Event`);
-
-        document.getElementById('new-user-submit').addEventListener('click', async () => {
+        const $submitButton = document.getElementById('new-user-submit');
+        $submitButton.addEventListener('click', async () => {
             const newUserForm = new FormData(document.getElementById('new-user-form'));
-
             const userData = {
                 "name": newUserForm.get('name'),
                 "email": newUserForm.get('email'),
                 "password":newUserForm.get('password')
             }
+            const userDataJsonString = JSON.stringify(userData);
 
-            const stringJson = JSON.stringify(userData);
+            const isUserCreated = await STATIC.performFetch(userDataJsonString, 'fetch.newuser');
 
-            // Change screen text to: User has been created.
-            const userCreated = await STATIC.performFetch(stringJson, 'fetch.newuser');
-            console.log(userCreated,userCreated, typeof(userCreated));
-
-            if (userCreated === 'true') {
-                console.log(`New user created!`);
-                document.location.href="/";
+            if (isUserCreated === 'true') {
+                const $messageText = document.getElementById('message-text');
+                $messageText.innerText = "User created!";
+                setTimeout( () => {
+                    document.location.href="/";
+                }, 1250);
             } else {
-                document.getElementById('error-text').innerText = "User already exists";
+                const $messageText = document.getElementById('message-text');
+                $messageText.innerText = "User already exists";
                 console.log('User was not created');
             }
-
-            // Need to add a message on success
-
-
-            // if fail then post error message
-        })
-
+        });
     }
-
 }
 {
     new NewUser();

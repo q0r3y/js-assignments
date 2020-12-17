@@ -1,12 +1,16 @@
+/**
+ * Contains the methods necessary for the login page
+ */
+
 'use strict';
 
 import STATIC from '../Static.js';
 
-export default class Login {
+class Login {
 
     constructor() {
+        STATIC.disableEnterKey();
         sessionStorage.setItem("user", '');
-        STATIC.stopEnterKey();
         this.loginEventListener();
         this.newUserLinkListener();
     }
@@ -16,30 +20,27 @@ export default class Login {
      * @returns {void}
      */
     loginEventListener() {
-        console.log(`Listening for login`);
+        const $loginButton = document.getElementById('login-button');
 
-        document.getElementById(`login-button`).addEventListener('click', async () => {
+        $loginButton.addEventListener('click', async () => {
             const loginForm = new FormData(document.getElementById(`login-form`));
-            const EMAIL = loginForm.get('email');
-            const PASSWORD = loginForm.get('password')
-
+            const email = loginForm.get('email');
+            const password = loginForm.get('password');
             const loginData = {
-                "email": EMAIL,
-                "password": PASSWORD
-            }
-
-            const stringJson = JSON.stringify(loginData);
-
-            const isValidLogin = await STATIC.performFetch(stringJson, 'fetch.login');
+                "email": email,
+                "password": password
+            };
+            const loginDataJsonString = JSON.stringify(loginData);
+            const isValidLogin = await STATIC.performFetch(loginDataJsonString, 'fetch.login');
 
             if (isValidLogin === 'true') {
-                console.log('Valid login found!')
-                await STATIC.setUserSessionData(EMAIL);
+                await STATIC.setUserSessionData(email);
                 document.location.href="/home";
             } else {
-                document.getElementById('error-text').innerText = "Error invalid password or user not found";
+                const $errorText = document.getElementById('error-text');
+                $errorText.innerText = "Error invalid password or user not found";
             }
-        })
+        });
     }
 
     /**
@@ -47,14 +48,14 @@ export default class Login {
      * @returns {void}
      */
     newUserLinkListener() {
-        document.getElementById('newuser-button').addEventListener('click', () => {
+        const $newUserButton = document.getElementById('newuser-button');
+        $newUserButton.addEventListener('click', () => {
             document.location.href="/newuser";
-        })
+        });
     }
 
-
-
 }
+
 {
     new Login();
 }

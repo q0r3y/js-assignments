@@ -1,3 +1,5 @@
+/** CSS styles for the deposit page **/
+
 #main-display-bar {
     display:grid;
     grid-template-rows: 1fr auto;
