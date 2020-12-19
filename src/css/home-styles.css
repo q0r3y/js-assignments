@@ -17,7 +17,8 @@ body {
 
 
 #bank-name {
-    font-family: Brush Script MT, serif;
+    font-family: "Brush Script MT", serif;
+    font-style: italic;
     font-size: 2em;
     padding-top: 2%;
     margin: 0;

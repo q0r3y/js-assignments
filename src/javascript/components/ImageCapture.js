@@ -4,13 +4,18 @@ import STATIC from '../Static.js';
 
 export default class ImageCapture {
 
+    _user;
+
     /**
      *
      */
     constructor() {
-        this.startVideoButtonListener();
-        this.captureButtonListener();
-        this.saveButtonListener();
+        STATIC.updateUserSessionData().then( () => {
+            this._user = JSON.parse(sessionStorage.getItem("user"));
+            this.startVideoButtonListener();
+            this.captureButtonListener();
+            this.saveButtonListener();
+        });
     }
 
     /**
@@ -19,9 +24,10 @@ export default class ImageCapture {
     startVideoButtonListener() {
         const $startCaptureButton = document.getElementById('start-capture-button');
         $startCaptureButton.addEventListener('click', async () => {
-
+            const $takeCaptureButton = document.getElementById('take-capture-button');
             const $canvas = document.getElementById('video-canvas');
             const $videoBox = document.getElementById('video');
+            $takeCaptureButton.disabled = false;
             $canvas.style.display = 'none';
             $videoBox.style.display = 'block';
             try {
@@ -36,7 +42,7 @@ export default class ImageCapture {
                 window.stream = stream;
                 $videoBox.srcObject = stream;
             } catch (error) {
-                console.error(error);
+                this.displayScreenMessage('Unable to access camera');
             }
         });
     }
@@ -46,6 +52,7 @@ export default class ImageCapture {
      */
     captureButtonListener() {
         const $takeCaptureButton = document.getElementById('take-capture-button');
+        $takeCaptureButton.disabled = true;
         $takeCaptureButton.addEventListener('click', () => {
 
             if (window.stream) {
@@ -77,8 +84,8 @@ export default class ImageCapture {
         $sendCaptureButton.addEventListener('click', () => {
             const $canvas = document.getElementById('video-canvas');
             const canvasBase64 = $canvas.toDataURL();
-            this.sendImageToNode(canvasBase64);
-            this.displayScreenMessage();
+            this.sendImageToNode(canvasBase64, this._user.email);
+            this.displayScreenMessage('Image sent to server!');
         });
     }
 
@@ -95,18 +102,23 @@ export default class ImageCapture {
     /**
      *
      * @param canvasBase64
+     * @param email
      */
-    sendImageToNode(canvasBase64) {
-        STATIC.performFetch(canvasBase64, 'fetch.deposit');
+    sendImageToNode(canvasBase64, email) {
+        const deposit = JSON.stringify({
+            'user' : email,
+            'image_data' : canvasBase64
+        });
+        STATIC.performFetch(deposit, 'fetch.deposit');
         console.log(canvasBase64);
     }
 
     /**
      * Displays status message
      */
-    displayScreenMessage() {
+    displayScreenMessage(message) {
         const $mainDisplayBar = document.getElementById('main-display-bar');
-        $mainDisplayBar.innerHTML = `<i id="image-sent">Image sent to server</i>`;
+        $mainDisplayBar.innerHTML = `<i id="message-text">${message}</i>`;
         setTimeout(() => {
             document.location.href="/home";
         }, 1250);

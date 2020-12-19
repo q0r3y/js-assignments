@@ -11,6 +11,7 @@ class Login {
     constructor() {
         STATIC.disableEnterKey();
         sessionStorage.setItem("user", '');
+        sessionStorage.setItem("email", '');
         this.loginEventListener();
         this.newUserLinkListener();
     }
@@ -34,11 +35,10 @@ class Login {
             const isValidLogin = await STATIC.performFetch(loginDataJsonString, 'fetch.login');
 
             if (isValidLogin === 'true') {
-                await STATIC.setUserSessionData(email);
+                sessionStorage.setItem("email", String(email));
                 document.location.href="/home";
             } else {
-                const $errorText = document.getElementById('error-text');
-                $errorText.innerText = "Error invalid password or user not found";
+                STATIC.setMessageText('Error invalid password or user not found', false);
             }
         });
     }

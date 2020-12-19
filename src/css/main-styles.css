@@ -33,21 +33,32 @@ form {
     grid-column: 1 / -1;
 }
 
+
 #password-input {
     grid-column: 1 / -1;
 }
 
-#error-text {
-    color: crimson;
+label {
+    color: steelblue;
+}
+
+#message-text {
+    color: darkred;
     text-align: center;
     margin: 1em;
 }
 
 footer {
-    font-family: Brush Script MT;
+
     text-align: center;
     font-size: 3em;
+}
 
+footer a {
+    color: black;
+    text-decoration: none;
+    font-family: "Brush Script MT", serif;
+    font-style: italic;
 }
 
 @media only screen and (max-width: 900px) {

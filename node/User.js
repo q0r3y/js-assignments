@@ -39,10 +39,6 @@ class User {
             'CHECKING': new Account('CHECKING'),
             'CREDIT' : new Account('CREDIT')
         }
-
-        console.log(`Created new SAVINGS account: ${this.#_accounts.SAVINGS.accountNumber}`);
-        console.log(`Created new CHECKING account: ${this.#_accounts.CHECKING.accountNumber}`)
-        console.log(`Created new CREDIT account: ${this.#_accounts.CREDIT.accountNumber}`);
     }
 
     get email() {

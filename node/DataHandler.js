@@ -23,7 +23,12 @@ class DataHandler {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
                const EMAIL = parsedData.email;
                const PASSWORD = parsedData.password;
-               const isValidLogin = await bank.userLogin(EMAIL, PASSWORD);
+               let isValidLogin;
+               if (EMAIL.length <= 0 || PASSWORD.length <=0) {
+                    isValidLogin = false;
+               } else {
+                    isValidLogin = await bank.userLogin(EMAIL, PASSWORD);
+               }
                response.end(String(isValidLogin))
           })
      }
@@ -71,9 +76,15 @@ class DataHandler {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
                const TRANSFER_FROM = parsedData.transfer_from;
                const TRANSFER_TO = parsedData.transfer_to;
-               const TRANSFER_AMOUNT = Number(parsedData.transferAmount);
+               let TRANSFER_AMOUNT = parsedData.transferAmount;
+               let transferStatus;
 
-               let transferStatus = await bank.transferFunds(TRANSFER_FROM, TRANSFER_TO, TRANSFER_AMOUNT);
+               if (isNaN(TRANSFER_AMOUNT) || TRANSFER_AMOUNT <= 0) {
+                    transferStatus = false;
+               } else {
+                    TRANSFER_AMOUNT = Number(TRANSFER_AMOUNT).toFixed(2);
+                    transferStatus = await bank.transferFunds(TRANSFER_FROM, TRANSFER_TO, Number(TRANSFER_AMOUNT));
+               }
 
                response.end(String(transferStatus));
           })
@@ -86,9 +97,13 @@ class DataHandler {
       * @param response
       * @returns {Promise<void>}
       */
-     static async handleDeposit(bank, request, response) {
+     static async handleRemoteCheckDeposit(bank, request, response) {
           await DataHandler.handleJsonData(request, response, async (parsedData) => {
-               console.log('Got deposit');
+               const EMAIL = parsedData.email;
+               const base64imageData = parsedData.image_data;
+               // Need to store the deposit
+               console.log(`Got deposit for user: ${EMAIL}`);
+               console.log(base64imageData);
           })
      }
 

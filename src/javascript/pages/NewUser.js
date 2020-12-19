@@ -29,22 +29,23 @@ class NewUser {
                 "email": newUserForm.get('email'),
                 "password":newUserForm.get('password')
             }
-            const userDataJsonString = JSON.stringify(userData);
-
-            const isUserCreated = await STATIC.performFetch(userDataJsonString, 'fetch.newuser');
-
-            if (isUserCreated === 'true') {
-                const $messageText = document.getElementById('message-text');
-                $messageText.innerText = "User created!";
-                setTimeout( () => {
-                    document.location.href="/";
-                }, 1250);
+            const validInput = this.validateInput(userData);
+            if (validInput) {
+                const userDataJsonString = JSON.stringify(userData);
+                const isUserCreated = await STATIC.performFetch(userDataJsonString, 'fetch.newuser');
+                if (isUserCreated === 'true') {
+                    STATIC.setMessageText('User created!', true, "/");
+                } else {
+                    STATIC.setMessageText('User already exists', false);
+                }
             } else {
-                const $messageText = document.getElementById('message-text');
-                $messageText.innerText = "User already exists";
-                console.log('User was not created');
+                STATIC.setMessageText('Email and password must contain 5 or more characters.', false);
             }
         });
+    }
+
+    validateInput(inputData) {
+        return !(inputData.email.length < 5 || inputData.password < 5);
     }
 }
 {

@@ -8,14 +8,17 @@ import STATIC from '../Static.js';
 
 class Transfer {
 
-    _user = JSON.parse(sessionStorage.getItem("user"));
+    _user;
 
     /**
      *
      */
     constructor() {
-        this.setDropDownMenu();
-        this.transferListener();
+        STATIC.updateUserSessionData().then( () => {
+            this._user = JSON.parse(sessionStorage.getItem("user"));
+            this.setDropDownMenu();
+            this.transferListener();
+        });
     }
 
     /**
@@ -26,9 +29,9 @@ class Transfer {
         const $checkingDropDown = document.getElementById('checking-drop-down');
         const $creditDropDown = document.getElementById('credit-drop-down');
 
-        $savingsDropDown.innerText = `Savings ${this._user.savings_account} - ${this._user.savings_balance.toFixed(2)}`;
-        $checkingDropDown.innerText = `Checking ${this._user.checking_account} - ${this._user.checking_balance.toFixed(2)}`;
-        $creditDropDown.innerText = `Credit ${this._user.credit_account} - ${this._user.credit_balance.toFixed(2)}`;
+        $savingsDropDown.innerText = `Savings ${this._user.savings_account} - ${Number(this._user.savings_balance).toFixed(2)}`;
+        $checkingDropDown.innerText = `Checking ${this._user.checking_account} - ${Number(this._user.checking_balance).toFixed(2)}`;
+        $creditDropDown.innerText = `Credit ${this._user.credit_account} - ${Number(this._user.credit_balance).toFixed(2)}`;
 
         $savingsDropDown.value = `${this._user.savings_account}`;
         $checkingDropDown.value = `${this._user.checking_account}`;
@@ -54,13 +57,20 @@ class Transfer {
             const transferStatus = await STATIC.performFetch(transferDataJsonString, 'fetch.transfer');
 
             if (transferStatus === 'true') {
-                const messageTextElement = document.getElementById('message-text')
-                messageTextElement.innerText = `Transfer was successful!`;
-                setTimeout(() => {
-                    document.location.href="/home";
-                },1250)
+                STATIC.setMessageText('Transfer Successful', true, "/home");
+            } else {
+                STATIC.setMessageText('Unable to transfer funds', true, "/home");
             }
         });
+    }
+
+    setMessageText(message, redirect) {
+        const messageTextElement = document.getElementById('message-text')
+        messageTextElement.innerText = `Transfer was successful!`;
+
+        setTimeout(() => {
+            document.location.href="/home";
+        },1250)
     }
 }
 {

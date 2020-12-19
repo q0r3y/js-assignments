@@ -43,13 +43,23 @@ export default class Static {
 
     /**
      *
-     * @param email
      * @returns {Promise<void>}
      */
-    static async setUserSessionData(email) {
-        const emailJson = JSON.stringify({"email" : email})
+    static async updateUserSessionData() {
+        const emailJson = JSON.stringify({ 'email' : sessionStorage.getItem('email')});
         const currentUser = await Static.performFetch(emailJson, 'fetch.user');
         sessionStorage.setItem("user", currentUser);
+    }
+
+
+    static setMessageText(message, redirect, url) {
+        const $messageTextElement = document.getElementById('message-text')
+        $messageTextElement.innerText = message;
+        if (redirect) {
+            setTimeout(() => {
+                document.location.href= url;
+            },1250)
+        }
     }
 
 }

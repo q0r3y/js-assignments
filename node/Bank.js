@@ -2,9 +2,6 @@
 
 const USER = require('./User');
 
-//todo: handle bank processes
-//todo: add validate class
-
 class Bank {
 
     #userDatabase = [];
@@ -93,7 +90,6 @@ class Bank {
         console.log('Transferring funds');
         console.log(fromAccount, toAccount);
 
-
         const fromUser = {
             'accountValid' : false,
             'account' : ''
@@ -105,29 +101,25 @@ class Bank {
         }
 
         for (let user of this.#userDatabase) {
-            console.log(`Checking user list..`);
             for (let account in user.accounts) {
                 const USERS_ACCOUNT_NUMBER = String(user.accounts[account].accountNumber);
-                console.log(USERS_ACCOUNT_NUMBER);
                 if (fromAccount === USERS_ACCOUNT_NUMBER) {
                     fromUser.accountValid = true;
                     fromUser.account = user.accounts[account];
-                    console.log('Found valid From Account');
                 }
                 if (toAccount === USERS_ACCOUNT_NUMBER) {
                     toUser.accountValid = true;
                     toUser.account = user.accounts[account];
-                    console.log('Found valid To Account');
                 }
 
                 if (fromUser.accountValid && toUser.accountValid) {
                     if (fromUser.account.balance - transferAmount >= 0) {
                         fromUser.account.balance -= transferAmount;
                         toUser.account.balance += transferAmount;
-                        console.log(fromUser.account.balance);
-                        console.log(`Funds transferred successfully.`);
+                        console.log(`Transferred: ${transferAmount} From: ${fromUser.account.accountNumber} to ${toUser.account.accountNumber}`);
                         return true;
                     } else {
+                        console.log(`Cannot Transfer: ${transferAmount} From: ${fromUser.account.accountNumber} to ${toUser.account.accountNumber}`);
                         console.log(`The transfer would make the fromAccount balance negative. Returning false`);
                         return false;
                     }

@@ -4,16 +4,21 @@
 
 'use strict';
 
+import STATIC from "../Static.js";
+
 class Home {
 
-    _user = JSON.parse(sessionStorage.getItem("user"));
+    _user;
 
     /**
      *
      */
     constructor() {
-        this.displayName().then(() => {
-            this.displayBalance();
+        STATIC.updateUserSessionData().then( () => {
+            this._user = JSON.parse(sessionStorage.getItem("user"));
+            this.displayName().then(() => {
+                this.displayBalance();
+            });
         });
     }
 
@@ -33,9 +38,9 @@ class Home {
         $savingsAccountNumber.innerText = `Savings Account: ${this._user.savings_account}`;
         $checkingAccountNumber.innerText = `Checking Account: ${this._user.checking_account}`;
         $creditAccountNumber.innerText = `Credit Card: ${this._user.credit_account}`;
-        $savingsBalance.innerText = `$${this._user.savings_balance.toFixed(2)}`;
-        $checkingBalance.innerText = `$${this._user.checking_balance.toFixed(2)}`;
-        $creditBalance.innerText = `$${this._user.credit_balance.toFixed(2)}`;
+        $savingsBalance.innerText = `$${Number(this._user.savings_balance).toFixed(2)}`;
+        $checkingBalance.innerText = `$${Number(this._user.checking_balance).toFixed(2)}`;
+        $creditBalance.innerText = `$${Number(this._user.credit_balance).toFixed(2)}`;
     }
 
     /**

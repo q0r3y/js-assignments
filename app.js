@@ -77,13 +77,17 @@ class app {
                          return await DATA_HANDLER.handleLogin(this.#bank, request, response);
                     } else if (request.headers['x-requested-with'] === 'fetch.user') {
                          return await DATA_HANDLER.handleUserRetrieval(this.#bank, request, response);
+                    } else if (request.headers['x-requested-with'] === 'fetch.transfer') {
+                         return await DATA_HANDLER.handleFundTransfer(this.#bank, request, response);
+                    } else if (request.headers['x-requested-with'] === 'fetch.deposit') {
+                         return await DATA_HANDLER.handleRemoteCheckDeposit(this.#bank, request, response);
                     } else {
                          console.log(`${request.headers}`);
                          console.log(`Yo, somethings super wrong BDH!`);
                     }
                /**
                * END POSTS
-                **/
+               **/
                } else if (request.url.indexOf('.txt') >= 0) {
                     DATA_HANDLER.renderDom(request.url.slice(1), 'text/plain', httpHandler, 'utf-8');
                } else if (request.url.indexOf('.css') >= 0) {
@@ -105,14 +109,18 @@ class app {
                } else if (request.url.indexOf('.ico') >= 0) {
                     DATA_HANDLER.renderDom(request.url.slice(1), 'image/x-icon', httpHandler, 'binary');
                /**
-                * PATHS
-                **/
+               * PATHS
+               **/
                } else if (request.url.indexOf('/newuser') >= 0) {
-                    DATA_HANDLER.renderDom('src/views/newuser.ejs', 'text/html', httpHandler, 'utf-8');
-               } else if (request.url.indexOf('/index') >= 0) {
-                    DATA_HANDLER.renderDom('src/views/index.ejs', 'text/html', httpHandler, 'utf-8');
+                    DATA_HANDLER.renderDom('src/views/pages/newuser.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/home') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/pages/home.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/deposit') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/pages/deposit.ejs', 'text/html', httpHandler, 'utf-8');
+               } else if (request.url.indexOf('/transfer') >= 0) {
+                    DATA_HANDLER.renderDom('src/views/pages/transfer.ejs', 'text/html', httpHandler, 'utf-8');
                } else if (request.url.indexOf('/') >= 0) {
-                    DATA_HANDLER.renderDom('src/views/login.ejs', 'text/html', httpHandler, 'utf-8');
+                    DATA_HANDLER.renderDom('src/views/pages/login.ejs', 'text/html', httpHandler, 'utf-8');
                /**
                * END PATHS
                **/

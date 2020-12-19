@@ -16,7 +16,6 @@ class AppScripts {
         STATIC.disableEnterKey();
         new MENU_BAR();
     }
-
 }
 {
 new AppScripts();

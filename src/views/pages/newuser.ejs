@@ -6,21 +6,24 @@
 <body>
 
     <figure>
-        <img src="src/images/152-bitcoin.png">
+        <a href="/">
+            <img src="src/images/152-bitcoin.png" alt="Mr.Big's Bank Logo">
+        </a>
     </figure>
 
     <form id="new-user-form">
         <input type="text" name="name" id="name-input" placeholder="Name">
         <input type="text" name="email" id="email-input" placeholder="Email">
-        <input type="text" name="password" id="password-input" placeholder="Password">
+        <input type="password" pattern=".{5,}" required title="5 characters minimum" name="password" id="password-input" placeholder="Password">
         <input class="button-primary" type="button" value="submit" name="button" id="new-user-submit">
+        <label for="name-input">Name</label>
+        <label for="email-input">Email</label>
     </form>
 
     <section id="messages">
         <p id="sign-up-text">Good news! If you sign up for an account today you will receive $100 for free</p>
         <p id="message-text"></p>
     </section>
-
 
     <script src="src/javascript/pages/NewUser.js" type="module"></script>
 

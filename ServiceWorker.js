@@ -1,46 +1,53 @@
-const CACHE_VERSION = 'v1.00.00';
+// https://github.com/marcushellberg/bad-news/blob/master/sw.js
+const CACHE_VERSION = 'v1.00.03';
 const CACHE_FILES = [
     '/',
+    '/manifest.json',
+    '/src/css/main-styles.css',
+    '/src/css/login-styles.css',
+    '/src/images/152-bitcoin.png',
+    '/src/images/192-bitcoin.png',
+    '/src/images/512-bitcoin.png',
+    '/src/images/favicon.ico',
+    '/src/javascript/Main.js',
 ];
+
 const OFFLINE_URL = "offline.html";
 
-self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open(CACHE_VERSION)
-            .then(function(cache) {
-                    console.log('Opened cache');
-                    cache.add(new Request(OFFLINE_URL, { cache: "reload" }));
-                    return cache.addAll(CACHE_FILES);
-                }
-            )
-    );
-    self.skipWaiting();
+self.addEventListener('install', async e => {
+    const cache = await caches.open(CACHE_VERSION);
+    await cache.addAll(CACHE_FILES);
+    return self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
-    event.waitUntil((async () => {
-        if ("navigationPreload" in self.registration) {
-            await self.registration.navigationPreload.enable();
-        }
-    })());
+self.addEventListener('activate', e => {
     self.clients.claim();
-    console.log(`SW activated:  ${event}`);
 });
 
-self.addEventListener('fetch', (event) => {
-    event.respondWith(async function() {
-        try {
-            const cachedResponse = await caches.match(event.request);
-            if (cachedResponse) {
-                return cachedResponse;
-            }
-            const response = await event.preloadResponse;
-            if (response) {
-                return await response;
-            }
-            return fetch(event.request);
-        } catch(error) {
-            console.log("Fetch failed; returning offline page instead.", error);
-        }
-    }());
+self.addEventListener('fetch', async e => {
+    const req = e.request;
+    const url = new URL(req.url);
+
+    if (url.origin === location.origin) {
+        e.respondWith(cacheFirst(req));
+    } else {
+        e.respondWith(networkAndCache(req));
+    }
 });
+
+async function cacheFirst(req) {
+    const cache = await caches.open(CACHE_VERSION);
+    const cached = await cache.match(req);
+    return cached || fetch(req);
+}
+
+async function networkAndCache(req) {
+    const cache = await caches.open(CACHE_VERSION);
+    try {
+        const fresh = await fetch(req);
+        await cache.put(req, fresh.clone());
+        return fresh;
+    } catch (e) {
+        return await cache.match(req);
+    }
+}

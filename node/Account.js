@@ -12,7 +12,7 @@ class Account {
      * @param accountType
      * @param balance
      */
-    constructor(accountType, balance=0) {
+    constructor(accountType, balance= 0) {
         this.#_accountType = accountType;
         this.#_balance = balance;
         this.#_accountNumber = ++Account._ACCOUNT_NUMBER;
