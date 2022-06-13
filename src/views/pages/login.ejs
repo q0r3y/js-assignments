@@ -1,0 +1,27 @@
+<%- include ('src/views/partials/header.ejs'); -%>
+<link rel="stylesheet" href="src/css/main-styles.css">
+<link rel="stylesheet" href="src/css/login-styles.css">
+
+</head>
+
+<body>
+
+    <figure>
+        <a href="/">
+            <img src="src/images/152-bitcoin.png" alt="Mr.Big's Bank Logo">
+        </a>
+    </figure>
+
+    <form id="login-form">
+        <input type="text" name="email" id="email-input" placeholder="Email">
+        <input type="password" name="password" id="password-input" placeholder="Password">
+        <input type="button" value="Login" name="button" id="login-button">
+        <input type="button" value="New User" name="button" id="newuser-button">
+        <label for="email-input">Email</label>
+        <label for="password-input">Password</label>
+    </form>
+
+    <p id="message-text"></p>
+
+<script src="src/javascript/pages/Login.js" type="module"></script>
+<%- include ('src/views/partials/footer.ejs'); -%>

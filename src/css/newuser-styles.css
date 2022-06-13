@@ -1,0 +1,19 @@
+/** CSS styles for the newuser page **/
+
+form {
+    margin: 0;
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+#sign-up-text {
+    text-align: center;
+    margin: 1em;
+}
+
+#message-text {
+    text-align: center;
+}
